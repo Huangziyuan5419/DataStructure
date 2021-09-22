@@ -4,29 +4,29 @@
 #define MaxLenth 4
 typedef int ElemType;
 
-// Ë³Ğò±í
+// é¡ºåºè¡¨
 typedef struct Arr
 {
-	int* pBase; //ÃèÊöÊı×éÔªËØµÄµÚÒ»¸öµØÖ·
-	int len;//ÃèÊöÊı×éµÄ³¤¶È
-	int cnt;//µ±Ç°Êı×éÓĞĞ§ÔªËØµÄ¸öÊı
+	int* pBase; //æè¿°æ•°ç»„å…ƒç´ çš„ç¬¬ä¸€ä¸ªåœ°å€
+	int len;//æè¿°æ•°ç»„çš„é•¿åº¦
+	int cnt;//å½“å‰æ•°ç»„æœ‰æ•ˆå…ƒç´ çš„ä¸ªæ•°
 
 }Array;
 
 
-void Create(Array* pArr, int lenth);//³õÊ¼»¯
-int Append(Array* pArr, int val);//ÏòË³Ğò±íÄ©Î²×·¼Ó
-int Insert(Array* pArr, int pos, int val);//²åÈë
-int Delete(Array* pArr, int pos);//É¾³ı±íÔªËØ
-int IsEmpty(Array* pArr);//ÊÇ·ñÎª¿Õ
-int IsFull(Array* pArr);//ÊÇ·ñÎªÂú
-void Show(Array* pArr); //ÏÔÊ¾±íÔªËØ
+void Create(Array* pArr, int lenth);//åˆå§‹åŒ–
+int Append(Array* pArr, int val);//å‘é¡ºåºè¡¨æœ«å°¾è¿½åŠ 
+int Insert(Array* pArr, int pos, int val);//æ’å…¥
+int Delete(Array* pArr, int pos);//åˆ é™¤è¡¨å…ƒç´ 
+int IsEmpty(Array* pArr);//æ˜¯å¦ä¸ºç©º
+int IsFull(Array* pArr);//æ˜¯å¦ä¸ºæ»¡
+void Show(Array* pArr); //æ˜¾ç¤ºè¡¨å…ƒç´ 
 
 
 int main()
 {
-	int val; //±íÊ¾±»É¾ÔªËØµÄÖµ
-	Array arr;//¶¨ÒåÒ»¸ö½á¹¹Ìå±äÁ¿
+	int val; //è¡¨ç¤ºè¢«åˆ å…ƒç´ çš„å€¼
+	Array arr;//å®šä¹‰ä¸€ä¸ªç»“æ„ä½“å˜é‡
 	Create(&arr, MaxLenth);
 	Append(&arr, 1);
 	Append(&arr, 3);
@@ -43,12 +43,12 @@ void Create(Array* pArr, int lenth)
 	pArr->pBase = (int*)(malloc(sizeof(int) * lenth));
 	if (pArr->pBase ==NULL)
 	{
-		printf("¶¯Ì¬·ÖÅäÊ§°Ü£¡\n");
+		printf("åŠ¨æ€åˆ†é…å¤±è´¥ï¼\n");
 		exit(-1);
 	}
 	else
 	{
-		printf("¶¯Ì¬·ÖÅä³É¹¦£¡\n");
+		printf("åŠ¨æ€åˆ†é…æˆåŠŸï¼\n");
 		pArr->len = lenth;
 		pArr->cnt = 0;
 	}
@@ -66,15 +66,15 @@ int Append(Array* pArr, int val)
 int IsEmpty(Array* pArr)
 {
 	if (pArr->cnt == 0)
-		return 1;//1±íÊ¾Îª¿Õ
+		return 1;//1è¡¨ç¤ºä¸ºç©º
 	else
-		return 0;//±íÊ¾·Ç¿Õ
+		return 0;//è¡¨ç¤ºéç©º
 }
 
 int IsFull(Array* pArr)
 {
 	if (pArr->cnt == pArr->len)
-		return 1; //1±íÊ¾±íÂú
+		return 1; //1è¡¨ç¤ºè¡¨æ»¡
 	else
 		return 0;
 }
@@ -85,7 +85,7 @@ void Show(Array* pArr)
 {
 	if (IsEmpty(pArr))
 	{
-		printf("¸Ã±íÎª¿Õ");
+		printf("è¯¥è¡¨ä¸ºç©º");
 	}
 	else
 	{
@@ -98,18 +98,18 @@ void Show(Array* pArr)
 	
 }
 
-int Insert(Array* pArr, int pos, int val)//²åÈëÔªËØ£¬ÔÚposÇ°Ãæ²åÈë£¬pos´Ó1¿ªÊ¼
+int Insert(Array* pArr, int pos, int val)//æ’å…¥å…ƒç´ ï¼Œåœ¨poså‰é¢æ’å…¥ï¼Œposä»1å¼€å§‹
 {
 	if (IsFull(pArr))
 	{
-		printf("±íÂú\n");
+		printf("è¡¨æ»¡\n");
 		return 0;
 	}
 		
-	if (pos<1 || pos > pArr->cnt + 1)//²åÈëÎ»ÖÃ²»ºÏ·¨
+	if (pos<1 || pos > pArr->cnt + 1)//æ’å…¥ä½ç½®ä¸åˆæ³•
 	{
-		printf("²åÈëÎ»ÖÃ·Ç·¨\n");
-		return 0; // ±íÊ¾²åÈëÊ§°Ü
+		printf("æ’å…¥ä½ç½®éæ³•\n");
+		return 0; // è¡¨ç¤ºæ’å…¥å¤±è´¥
 	}
 
 	for (int i = pArr->cnt - 1; i >= pos - 1; i--)
@@ -122,18 +122,18 @@ int Insert(Array* pArr, int pos, int val)//²åÈëÔªËØ£¬ÔÚposÇ°Ãæ²åÈë£¬pos´Ó1¿ªÊ¼
 
 }
 
-int Delete(Array* pArr, int pos, int* val)//É¾³ı±íÔªËØ
+int Delete(Array* pArr, int pos, int* val)//åˆ é™¤è¡¨å…ƒç´ 
 {
 	if (IsEmpty(pArr))
 	{
-		printf("¸Ã±íÎª¿Õ");
+		printf("è¯¥è¡¨ä¸ºç©º");
 		return 0;
 	}
 
-	if (pos<1 || pos > pArr->cnt)//É¾³ıÔªËØÎ»ÖÃ²»ºÏ·¨
+	if (pos<1 || pos > pArr->cnt)//åˆ é™¤å…ƒç´ ä½ç½®ä¸åˆæ³•
 	{
-		printf("É¾³ıÔªËØÎ»ÖÃ²»ºÏ·¨\n");
-		return 0; // ±íÊ¾É¾³ıÊ§°Ü
+		printf("åˆ é™¤å…ƒç´ ä½ç½®ä¸åˆæ³•\n");
+		return 0; // è¡¨ç¤ºåˆ é™¤å¤±è´¥
 	}
 	*val = pArr->pBase[pos - 1];
 	for (int i = pos; i <= pArr->cnt-1; i++)
